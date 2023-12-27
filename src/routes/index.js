@@ -5,6 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('../data/connection');
+const postsRoutes = require('./posts');
 
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(morgan('dev'));
+
+app.use('/posts', postsRoutes);
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minuto
